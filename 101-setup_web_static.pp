@@ -1,6 +1,6 @@
 # Task #0 but by using Puppet
 exec { 'apt-get':
-  command => 'sudo apt-get -y update; sudo apt-get -y install nginx',
+  command => 'sudo sudo apt-get -y update; sudo apt-get -y install nginx',
   path    => ['/usr/bin', '/bin'],
   returns => [0,1]
 }
@@ -20,7 +20,7 @@ exec { 'mkdir-releases':
 }
 
 exec { 'echo':
-  require => Exec['mkdir-release'],
+  require => Exec['mkdir-releases'],
   command => 'echo "Holberton School" | sudo tee /data/web_static/releases/test/index.html > /dev/null',
   path    => ['/usr/bin', '/bin'],
   returns => [0,1]
