@@ -47,6 +47,10 @@ def do_deploy(archive_path):
         return False
 
     def deploy():
+        """
+        creates and distributes an archive to your web servers, using the
+        function deploy
+        """
         try:
             archive_path = do_pack()
             value = do_deploy(archive_path)
