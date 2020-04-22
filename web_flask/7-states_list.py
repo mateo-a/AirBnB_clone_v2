@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close_session(exception):
+def close_session(error):
     """ remove the current SQLAlchemy Session """
     storage.close()
 
@@ -16,8 +16,8 @@ def close_session(exception):
 def states_list():
     """ display a HTML page: (inside the tag BODY) """
     states = storage.all("State").values()
-    return render_template("7-states_list.html",
-                           qr="States", states=states)
+    states = sorted(states, key=lambda k: k.name)
+    return render_template("7-states_list.html", states=states)
 
 
 if __name__ == "__main__":
