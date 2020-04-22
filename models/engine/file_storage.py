@@ -74,6 +74,6 @@ class FileStorage:
                     break
             self.save()
 
-def close(self):
-    """ call reload() method for deserializing the JSON file to objects """
-    self.reload()
+    def close(self):
+        """ call reload() method for deserializing the JSON file to objects """
+        self.reload()
