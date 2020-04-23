@@ -23,8 +23,8 @@ def states_list():
 
 @app.route('/cities_by_states/')
 def cities_by_states():
-    """List all cities by states"""
-    states = storage.all("State").values()
+    """all cities by states"""
+    states = storage.all(State).values()
     result = []
     for state in sorted(states, key=lambda x: x.name):
         result.append([state, state.cities])
