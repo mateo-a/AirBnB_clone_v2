@@ -25,10 +25,11 @@ def states_list():
 def cities_by_states():
     """all cities by states"""
     states = storage.all(State).values()
+    states = sorted(states, key=lambda k: k.name)
     result = []
-    for state in sorted(states, key=lambda k: k.name):
+    for state in states:
         result.append([state, sorted(state.cities, key=lambda k: k.name)])
-    return render_template("8-cities_by_states.html", result=result)
+    return render_template("8-cities_by_states.html", states=result)
 
 
 if __name__ == "__main__":
