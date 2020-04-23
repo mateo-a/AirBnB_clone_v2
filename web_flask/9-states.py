@@ -1,30 +1,34 @@
 #!/usr/bin/python3
 """ script that starts a Flask web application """
-from models import storage, State
+from models import storage
+from models.state import State
+from os import environ
 from flask import Flask, render_template
 app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
-def states_state(id=""):
+def cities_state(id=""):
     """ displays a HTML page:(inside the tag BODY) with list of cities """
-    state_obj = storage.all("State")
-    city_obj = storage.all("City")
-    states = list()
-    cities = list()
-    for state, value in state_obj.items():
-        states.append(value)
-    for city, value in city_obj.items():
-        cities.append(value)
+    states = storage.all(State).values()
+    states = sorted(states, key=lambda k: k.name)
+    flag = 0
+    state = ""
+    cities = []
+    for x in states:
+        if id == x.id:
+            state = x
+            flag = 1
+            break
+        if flag:
+            states = sorted(state.cities, key=lambda k: k.name)
+            state = state.name
+        if id and not flag:
+            flag = 2
 
-    state_id = "State.{}".format(id)
-    if id is not None and state_id not in state_obj:
-        states = None
-    return render_template("9-states.html",
-                           states=states,
-                           cities=cities,
-                           id=id)
+        return render_template("9-states.html", val=state, result=states,
+                               flag=flag)
 
 
 @app.teardown_appcontext
