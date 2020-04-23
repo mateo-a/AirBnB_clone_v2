@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.teardown_appcontext
 def close_session(error):
         """ remove the current SQLAlchemy Session """
-            storage.close()
+        storage.close()
 
 
 @app.route('/states', strict_slashes=False)
