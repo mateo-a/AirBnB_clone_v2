@@ -27,7 +27,8 @@ def states_state(id=""):
                                    name="State: {}".format(v.name),
                                    states=result)
         else:
-            return render_template("9-states.html", state="", name="Not found!",
+            return render_template("9-states.html", state="",
+                                   name="Not found!",
                                    states=states)
 
 
