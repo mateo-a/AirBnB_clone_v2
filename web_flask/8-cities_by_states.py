@@ -2,8 +2,8 @@
 """ script that starts a Flask web application """
 from models import storage
 from models.state import State
-from flask import Flask, render_template
 from os import environ
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
@@ -21,7 +21,7 @@ def states_list():
     return render_template("7-states_list.html", states=states)
 
 
-@app.route('/cities_by_states/')
+@app.route('/cities_by_states')
 def cities_by_states():
     """all cities by states"""
     states = storage.all(State).values()
