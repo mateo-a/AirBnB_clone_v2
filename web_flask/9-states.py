@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def close_session(error):
-        """ remove the current SQLAlchemy Session """
-        storage.close()
+    """ remove the current SQLAlchemy Session """
+    storage.close()
 
 
 @app.route('/states', strict_slashes=False)
@@ -25,20 +25,20 @@ def cities_state(id=""):
 
     for i in states:
         if id == i.id:
-                state = i
-                found = 1
-                break
-        if found:
-                states = sorted(state.cities, key=lambda k: k.name)
-                state = state.name
+            state = i
+            found = 1
+            break
+    if found:
+        states = sorted(state.cities, key=lambda k: k.name)
+        state = state.name
 
-        if id and not found:
-                found = 2
+    if id and not found:
+        found = 2
 
-        return render_template('9-states.html',
-                               state=state,
-                               array=states,
-                               found=found)
+    return render_template('9-states.html',
+                           state=state,
+                           array=states,
+                           found=found)
 
 
 if __name__ == "__main__":
