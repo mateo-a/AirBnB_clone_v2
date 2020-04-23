@@ -7,6 +7,12 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
+@app.teardown_appcontext
+def close_session(error):
+        """ remove the current SQLAlchemy Session """
+            storage.close()
+
+
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
 def cities_state(id=""):
@@ -29,12 +35,6 @@ def cities_state(id=""):
 
         return render_template("9-states.html", state=state, result=states,
                                flag=flag)
-
-
-@app.teardown_appcontext
-def close_session(error):
-    """ remove the current SQLAlchemy Session """
-    storage.close()
 
 
 if __name__ == "__main__":
