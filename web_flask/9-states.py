@@ -19,22 +19,26 @@ def cities_state(id=""):
     """ displays a HTML page:(inside the tag BODY) with list of cities """
     states = storage.all(State).values()
     states = sorted(states, key=lambda k: k.name)
-    flag = 0
+    found = 0
     state = ""
     cities = []
-    for x in states:
-        if id == x.id:
-            state = x
-            flag = 1
-            break
-        if flag:
-            states = sorted(state.cities, key=lambda k: k.name)
-            state = state.name
-        if id and not flag:
-            flag = 2
 
-        return render_template("9-states.html", state=state, result=states,
-                               flag=flag)
+    for i in states:
+        if id == i.id:
+                state = i
+                found = 1
+                break
+        if found:
+                states = sorted(state.cities, key=lambda k: k.name)
+                state = state.name
+
+        if id and not found:
+                found = 2
+
+        return render_template('9-states.html',
+                               state=state,
+                               array=states,
+                               found=found)
 
 
 if __name__ == "__main__":
