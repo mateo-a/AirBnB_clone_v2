@@ -27,7 +27,7 @@ def cities_state(id=""):
         if id and not flag:
             flag = 2
 
-        return render_template("9-states.html", val=state, result=states,
+        return render_template("9-states.html", state=state, result=states,
                                flag=flag)
 
 
